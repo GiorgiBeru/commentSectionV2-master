@@ -1,0 +1,97 @@
+* {
+  background-color: #fff;
+}
+section {
+  margin-left: 30%;
+  margin-right: 20%;
+  box-shadow: 8px 8px 2px 1px rgba(147, 147, 167, 0.2);
+  border-radius: 15px;
+  padding: 10px;
+  background-color: #fff;
+  margin-top: 20px;
+  .card {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    .you {
+      height: 28px;
+      width: 50px;
+      background-color: hsl(238, 40%, 52%);
+      color: white;
+      font-size: 12px;
+      text-align: center;
+      margin-left: 10px;
+      margin-top: 13px;
+      border-radius: 10px;
+      line-height: 30px;
+    }
+    .title {
+      display: flex;
+      margin-bottom: 5px;
+      img {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-left: 20px;
+        margin-top: 10px;
+      }
+      h1 {
+        font-size: 20px;
+        padding-left: 10px;
+        font-size: 18px;
+        margin-top: 15px;
+      }
+      span {
+        margin-top: 20px;
+        margin-left: 30px;
+        font-size: 14px;
+      }
+    }
+    .arricon:hover {
+      cursor: pointer;
+    }
+    .arricon {
+      display: flex;
+      margin-top: 20px;
+      margin-right: 20px;
+      color: hsl(238, 40%, 52%);
+      font-weight: bold;
+
+      #iconSeparate {
+        margin-right: 5px;
+      }
+      #icon1Div {
+        margin-right: 15px;
+        color: hsl(358, 79%, 66%);
+      }
+    }
+  }
+
+  p {
+    padding-left: 60px;
+    padding-bottom: 10px;
+  }
+}
+
+.votes {
+  width: 20px;
+  height: 40px;
+  box-shadow: 8px 8px 2px 1px rgba(147, 147, 167, 0.2);
+  padding-left: 5px;
+}
+.plus {
+  color: hsl(238, 40%, 52%);
+  font-size: large;
+  font-weight: bold;
+}
+.minus {
+  font-size: large;
+  font-weight: bold;
+  color: hsl(238, 40%, 52%);
+}
+.plus:hover {
+  cursor: pointer;
+}
+.minus:hover {
+  cursor: pointer;
+}

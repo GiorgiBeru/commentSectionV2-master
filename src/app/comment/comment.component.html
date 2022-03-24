@@ -1,0 +1,19 @@
+<section class="UpperPart">
+  <app-comment-item
+    (onMainReply)="HanldeMainReply($event)"
+    (idEmitted)="HandleIdEmitted($event)"
+    (replyToDelete)="HandleReplyToDelete()"
+    *ngFor="let comment of comments"
+    [commentsArray]="comments"
+    [commentItem]="comment"
+    [curUser]="currentUser"
+    
+  ></app-comment-item>
+</section>
+
+<div class="userReplyComment">
+  <img src="../../assets/{{currentUser.image.png}}" alt="User avatar">
+  <textarea id="textarea" [(ngModel)]="mainreply"></textarea>
+  <button id="button" (click)="reply()">Send</button>
+</div>
+
