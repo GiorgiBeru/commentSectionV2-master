@@ -93,6 +93,10 @@ section {
     background-color: hsl(238, 40%, 52%);
     color: white;
   }
+  &__updateButton:hover {
+    cursor: pointer;
+    transform: translate(2px, 2px);
+  }
 }
 
 .votes {

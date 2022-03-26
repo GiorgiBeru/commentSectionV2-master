@@ -13,22 +13,30 @@ export class CommentItemComponent implements OnInit {
   @Output() onMainReply: EventEmitter<any> = new EventEmitter<any>();
   @Output() idEmitted: EventEmitter<any> = new EventEmitter<any>();
   @Output() replyToDelete: EventEmitter<any> = new EventEmitter<any>();
-
-  userReply: Boolean = false;
+  @Output() onMainUpdate: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onCommentReplyUpdate: EventEmitter<any> = new EventEmitter<any>();
+  
+  deleteCommentari: boolean = false;
+  userMainReply = false;
   editContent = '';
   isEditActive = false;
   isModalActive = false;
   n: number = 0;
+  
 
   constructor() {}
 
+  handleReplyUpdate(data: any){
+    this.onCommentReplyUpdate.emit(data);
+  }
+
   userReplies() {
-    this.userReply = !this.userReply;
+    this.userMainReply = !this.userMainReply;
   }
 
   handleMainReply(content: string) {
     this.onMainReply.emit({ content, id: this.commentItem.id });
-    this.userReplies();
+    this.userMainReply = false;
   }
 
   upVote(score: number) {
@@ -49,7 +57,6 @@ export class CommentItemComponent implements OnInit {
   toggleEdit() {
     this.isEditActive = !this.isEditActive;
   }
-  deleteCommentari: boolean = false;
 
   deleteComment(id: number) {
     this.deleteCommentari = !this.deleteCommentari;
@@ -72,6 +79,13 @@ export class CommentItemComponent implements OnInit {
   toggleModal() {
     this.isModalActive = !this.isModalActive;
   }
-
-  ngOnInit(): void {}
+  updateMainReply(){
+    if (this.editContent) {
+      this.onMainUpdate.emit({id: this.commentItem.id, updateContent: this.editContent});
+      this.toggleEdit();
+    }
+  }
+  ngOnInit(): void {
+    this.editContent = this.commentItem.content;
+  }
 }

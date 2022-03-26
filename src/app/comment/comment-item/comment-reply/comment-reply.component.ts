@@ -12,17 +12,33 @@ export class CommentReplyComponent implements OnInit {
   @Input() repliesArray!: Reply[];
   @Output() contentEmmit: EventEmitter<string> = new EventEmitter<string>();
   @Output() idEmittedGrandChild: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onReplyUpdate: EventEmitter<any> = new EventEmitter<any>();
 
-  userReply: Boolean = false;
+  userReply = false;
   isModalActive = false;
-  deleteCommentari: boolean = false;
+  deleteCommentari = false;
+  isEditActive = false;
+  replyContent = '';
 
   constructor() {}
+
+  toggleIsEditActive() {
+    this.isEditActive = !this.isEditActive;
+  }
+
+  updateReply() {
+    if (this.replyContent) {
+      this.onReplyUpdate.emit({
+        id: this.replyItem.id,
+        updateContent: this.replyContent,
+      });
+      this.toggleIsEditActive();
+    }
+  }
 
   userReplies() {
     this.userReply = !this.userReply;
   }
-  ngOnInit(): void {}
 
   rearrangeReplies(score: number) {
     this.replyItem.score = score;
@@ -35,6 +51,7 @@ export class CommentReplyComponent implements OnInit {
     this.userReplies();
     this.contentEmmit.emit(content);
   }
+
   upVote(score: number) {
     score++;
     this.rearrangeReplies(score);
@@ -51,5 +68,8 @@ export class CommentReplyComponent implements OnInit {
 
   toggleModal() {
     this.isModalActive = !this.isModalActive;
+  }
+  ngOnInit(): void {
+    this.replyContent = this.replyItem.content;
   }
 }

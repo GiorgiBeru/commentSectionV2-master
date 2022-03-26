@@ -39,7 +39,7 @@
         </svg>
         Delete
       </div>
-      <div id="icon2Div">
+      <div id="icon2Div" (click)="toggleIsEditActive()">
         <svg
           width="14"
           height="14"
@@ -74,13 +74,21 @@
       Reply
     </div>
   </div>
-  <p>{{ replyItem.content }}</p>
+  <p *ngIf="!isEditActive">{{ replyItem.content }}</p>
+
+  <div *ngIf="isEditActive" class="edit">
+    <textarea class="edit__textArea" [(ngModel)]="replyContent"> </textarea>
+    <button class="edit__updateButton" (click)="updateReply()">
+      Update
+    </button>
+  </div>
 </section>
 
 <app-user-reply
   *ngIf="userReply"
   (onReply)="handleContent($event)"
   [replyItem]="replyCurUser"
+  [replyCommentUsername]="replyItem.user.username"
 ></app-user-reply>
 <app-suretodelete
   *ngIf="isModalActive"

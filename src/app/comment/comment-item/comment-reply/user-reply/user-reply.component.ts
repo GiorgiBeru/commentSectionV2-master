@@ -9,11 +9,20 @@ import { CurrentUser } from 'src/app/app.model';
 export class UserReplyComponent implements OnInit {
   @Output() onReply: EventEmitter<string> = new EventEmitter<string>();
   @Input() replyItem!: CurrentUser;
+  @Input() replyCommentUsername!: string;
+  @Input() mainCommentUsername!: string;
+
   content = '';
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.mainCommentUsername) {
+      this.content = '@' + this.mainCommentUsername + this.content;
+    } else {
+      this.content = '@' + this.replyCommentUsername + this.content;
+    }
+  }
 
   reply() {
     if (this.content) {

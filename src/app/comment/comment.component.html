@@ -3,12 +3,13 @@
     (onMainReply)="HanldeMainReply($event)"
     (idEmitted)="HandleIdEmitted($event)"
     (replyToDelete)="HandleReplyToDelete()"
+    (onMainUpdate)="handleOnMainUpdate($event)"
+    (onCommentReplyUpdate)="handleCommentReplyUpdate($event)"
     *ngFor="let comment of comments"
     [commentsArray]="comments"
     [commentItem]="comment"
     [curUser]="currentUser"
-    
-  ></app-comment-item>
+    ></app-comment-item>
 </section>
 
 <div class="userReplyComment">

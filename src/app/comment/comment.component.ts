@@ -4,6 +4,7 @@ import { StorageService } from '../storage.service';
 import { UsersService } from '../users.service';
 const commentKey = 'comments';
 import { formatDistance } from 'date-fns';
+import { ReplaySubject } from 'rxjs';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -103,5 +104,25 @@ export class CommentComponent implements OnInit {
       this.mainreply = '';
       this.refreshStorage();
     }
+  }
+  handleOnMainUpdate(data: any) {
+    this.comments = this.comments.map((comment: Commentari) => {
+      if (comment.id === data.id) {
+        comment.content = data.updateContent;
+      }
+      return comment;
+    });
+  }
+  handleCommentReplyUpdate(data: any) {
+    console.log(data);
+    this.comments.map((comment: Commentari) => {
+      comment.replies.map((reply: Reply) => {
+        if (reply.id === data.id) {
+          reply.content = data.updateContent;
+        }
+        return reply;
+      });
+      return comment;
+    });
   }
 }

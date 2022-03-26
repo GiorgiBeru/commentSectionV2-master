@@ -2,7 +2,7 @@
   <div class="card">
     <div class="title">
       <div class="votes">
-        <div class="plus" (click)="upVote(commentItem.score)">+</div>  
+        <div class="plus" (click)="upVote(commentItem.score)">+</div>
         {{ commentItem.score }}
         <div class="minus" (click)="downVote(commentItem.score)">-</div>
       </div>
@@ -71,15 +71,16 @@
   <p *ngIf="!isEditActive">{{ commentItem.content }}</p>
 
   <div *ngIf="isEditActive" class="edit">
-    <textarea class="edit__textArea" [(ngModel)]="editContent">
-      {{ commentItem.content }}
-    </textarea>
-    <button class="edit__updateButton">Update</button>
+    <textarea class="edit__textArea" [(ngModel)]="editContent"> </textarea>
+    <button class="edit__updateButton" (click)="updateMainReply()">
+      Update
+    </button>
   </div>
 </section>
 
 <app-comment-reply
   (contentEmmit)="handleMainReply($event)"
+  (onReplyUpdate)="handleReplyUpdate($event)"
   (idEmittedGrandChild)="handleIdEmittedGrandChild($event)"
   *ngFor="let reply of commentItem.replies"
   [replyItem]="reply"
@@ -90,7 +91,8 @@
 <app-user-reply
   (onReply)="handleMainReply($event)"
   [replyItem]="curUser"
-  *ngIf="userReply"
+  [mainCommentUsername]="commentItem.user.username"
+  *ngIf="userMainReply"
 ></app-user-reply>
 
 <app-suretodelete
